@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-industrial-50: #f0f7ff;
+  --color-industrial-100: #e0effe;
+  --color-industrial-200: #bae0fd;
+  --color-industrial-300: #7cc7fb;
+  --color-industrial-400: #38a9f8;
+  --color-industrial-500: #0e8de9;
+  --color-industrial-600: #026fc7;
+  --color-industrial-700: #0358a1;
+  --color-industrial-800: #074b85;
+  --color-industrial-900: #0c3f6e;
+  --color-industrial-950: #082849;
+}
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+/* Custom styles for Swiper pagination/navigation */
+.swiper-button-next, .swiper-button-prev {
+  @apply !text-white;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-industrial-500;
+}
+
+/* Glassmorphism utility */
+.glass {
+  @apply bg-white/80 backdrop-blur-md border border-white/20;
+}
