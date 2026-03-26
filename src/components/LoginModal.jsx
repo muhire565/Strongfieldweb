@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, User, Lock, ArrowRight } from 'lucide-react';
 import logo from '../images/stonglogo.jpeg';
 
 const LoginModal = ({ isOpen, onClose, onLogin }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username === 'admin' && password === 'admin123') {
+      setError('');
+      onLogin();
+    } else {
+      setError('Invalid username or password');
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -40,7 +54,12 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
                 <p className="text-slate-500 mt-2">Log in to access your dashboard</p>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); onLogin(); }}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                {error && (
+                  <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm text-center font-medium border border-red-200">
+                    {error}
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2 ml-1">Username</label>
                   <div className="relative group">
@@ -49,6 +68,8 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
                       type="text"
                       className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-industrial-500 focus:border-transparent transition-all"
                       placeholder="Enter your username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                 </div>
@@ -61,6 +82,8 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
                       type="password"
                       className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-industrial-500 focus:border-transparent transition-all"
                       placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                 </div>
